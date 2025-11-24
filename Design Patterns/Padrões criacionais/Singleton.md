@@ -16,7 +16,7 @@ As implementações do Singleton tem dois passos comuns:
 </ol>
 
 ## Exemplo em código
-```
+```php
 class ConexaoBD {
     private static $instancia = null;
 
