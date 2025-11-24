@@ -15,7 +15,7 @@ A solução pode ou não ter um "Diretor" que controla o processo de construçã
 
 ### Classe Carro
 Classe principal que representa o carro com suas propriedades.
-```
+```PHP
 class Carro
 {
 	private string $modelo;
@@ -56,7 +56,7 @@ class Carro
 
 ### Interface Builder
 Essa interface define os métodos para configurar os diferentes atributos.
-```
+```PHP
 interface CarroBuilder
 {
 	public function setModelo(string $modelo): void;
@@ -69,7 +69,7 @@ interface CarroBuilder
 ```
 
 ### Implementação concreta do Builder
-```
+```PHP
 class CarroConcretoBuilder implements CarroBuilder
 {
 	private Carro $carro;
@@ -106,7 +106,7 @@ class CarroConcretoBuilder implements CarroBuilder
 
 ### Classe Diretor
 Classe responsável por definir quais chamadas devem ser realizadas para ficar compatível com as configurações desejadas.
-```
+```PHP
 class Diretor
 {
 	private CarroBuilder $builder;
@@ -139,7 +139,7 @@ class Diretor
 ```
 
 ### Utilizando
-```
+```PHP
 <?php
 $builder = new CarroConcretoBuilder();
 $diretor = new Diretor($builder);

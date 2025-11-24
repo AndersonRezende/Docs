@@ -14,78 +14,69 @@ Como resultado temos um código bastante sujo, repleto de condicionais que alter
 O padrão Factory Method sugere que você substitua chamadas diretas de construção de objetos (usando o operador ``new``) por chamadas para um método fábrica especial. Os objetos retornados são normalmente chamados de ``produtos``.
 
 ## Exemplo em código
-```
+```PHP
 <?php
-abstract class Criador
+interface Veiculo
 {
-	abstract public function factoryMethod(): Produto;
+	public function conduzir(): void;
+}
+```
 
-	public function algumaOperacao(): string
+```PHP
+<?php
+class Carro implements Veiculo
+{
+	public function conduzir(): void
 	{
-		$produto = $this->factoryMethod();
-		$resultado = "Criador: mesmo criado de código funcionando em " $produto->operacao();
-		return $resultado;
+		echo "Dirigindo carro";
+	}
+}
+
+class Moto implements Veiculo
+{
+	public function conduzir(): void
+	{
+		echo "Pilotando moto";
 	}
 }
 ```
 
-```
+```PHP
 <?php
-class CriadorConcreto1 extends Criador
+abstract class VeiculoFactory
 {
-	public function factoryMethod(): Produto
+	abstract public function criarVeiculo(): Veiculo;
+
+	public function iniciarVeiculo(): void
 	{
-		return new ProdutoConcreto1();
+		$veiculo = $this->criarVeiculo();
+		$veiculo->conduzir();
 	}
 }
 ```
 
-```
+```PHP
 <?php
-class CriadorConcreto2 extends Criador
-{
-	public function factoryMethod(): Produto
-	{
-		return new ProdutoConcreto2();
-	}
+class CarroFactory extends VeiculoFactory {
+    public function criarVeiculo(): Veiculo {
+        return new Carro();
+    }
+}
+
+class MotoFactory extends VeiculoFactory {
+    public function criarVeiculo(): Veiculo {
+        return new Moto();
+    }
 }
 ```
 
-```
+```PHP
 <?php
-interface Produto
-{
-	public function operacao(): string;
-}
-```
+c$carroFactory = new CarroFactory();
+$carroFactory->iniciarVeiculo();
+// Saída: Dirigindo um carro
 
-```
-<?php
-class ProdutoConcreto1 implements Produto
-{
-	public function operacao(): string
-	{
-		return "Resultado do ProdutoConcreto1";
-	}
-}
-```
-
-```
-<?php
-class ProdutoConcreto1 implements Produto
-{
-	public function operacao(): string
-	{
-		return "Resultado do ProdutoConcreto2";
-	}
-}
-```
-
-```
-<?php
-$criador1 = new CriadorConcreto1();
-echo $criador1->algumaOperacao();
-
-$criador2 = new CriadorConcreto2();
-echo $criador2->algumaOperacao();
+$motoFactory = new MotoFactory();
+$motoFactory->iniciarVeiculo();
+// Saída: Pilotando uma moto
 ```

@@ -18,23 +18,21 @@ O próximo passo é declarar uma interface de fábrica abstrata que possua decla
 Será utilizado no exemplo a criação de componentes de interface gráfica (GUI) para os ambientes gráficos Gnome e KDE. Cada um desses possui sua própria implementação de componentes, mas utilizam uma interface comum.
 ### Interfaces para produtos abstratos
 Essas interfaces definem os componentes que serão criados pelas fábricas. Cada fábrica criará uma versão específica destes componentes.
-```
-interface Janela
-{
+```PHP
+interface Janela {
 	public function abrir(): void;
 }
 ```
 
-```
-interface Botao
-{
+```PHP
+interface Botao {
 	public function clicar(): void;
 }
 ```
 
 ### Implementação concreta dos produtos GNOME e KDE
 Aqui estão as implementações concretas dos produtos Gnome.
-```
+```PHP
 class JanelaGnome implements Janela
 {
 	public function abrir(): void
@@ -44,7 +42,7 @@ class JanelaGnome implements Janela
 }
 ```
 
-```
+```PHP
 class BotaoGnome implements Botao
 {
 	public function clicar(): void
@@ -55,7 +53,7 @@ class BotaoGnome implements Botao
 
 ```
 
-```
+```PHP
 class JanelaKde implements Janela
 {
 	public function abrir(): void
@@ -65,7 +63,7 @@ class JanelaKde implements Janela
 }
 ```
 
-```
+```PHP
 class BotaoKde implements Botao
 {
 	public function clicar(): void
@@ -77,7 +75,7 @@ class BotaoKde implements Botao
 
 ### Interface da fábrica abstrata
 A fábrica abstrata define os métodos para criar os diferentes componentes da interface gráfica.
-```
+```PHP
 interface GUIFactory
 {
 	public function criarBotao(): Botao;
@@ -88,7 +86,7 @@ interface GUIFactory
 
 ### Implementação das fábricas concretas
 Cada fábrica concreta cria produtos correspondentes ao seu ambiente específico, ou seja, Gnome ou KDE.
-```
+```PHP
 class GnomeFactory implements GUIFactory
 {
 	public function criarBotao(): Botao
@@ -103,7 +101,7 @@ class GnomeFactory implements GUIFactory
 }
 ```
 
-```
+```PHP
 class KdeFactory implements GUIFactory
 {
 	public function criarBotao(): Botao
@@ -120,7 +118,7 @@ class KdeFactory implements GUIFactory
 
 ### Cliente
 O cliente utiliza a fábrica abstrata para criar e manipular os componentes de forma genérica, sem precisar saber de qual fábrica concreta ele está utilizando (GNOME ou KDE).
-```
+```PHP
 class Aplicacao
 {
 	private Janela $janela;
@@ -141,7 +139,7 @@ class Aplicacao
 ```
 
 ### Utilizando
-```
+```PHP
 <?php
 $factory1 = new GnomeFactory();
 $aplicacao1 = new Aplicacao($factory1);
@@ -150,5 +148,4 @@ $aplicacao1->renderizarInterface();
 $factory2 = new KdeFactory();
 $aplicacao2 = new Aplicacao($factory2);
 $aplicacao2->renderizarInterface();
-
 ```

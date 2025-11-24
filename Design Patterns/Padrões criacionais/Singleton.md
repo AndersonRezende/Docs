@@ -42,8 +42,8 @@ class ConexaoBD {
 
     // Método para obter a única instância da classe
     public static function getInstancia() {
-        if (self::$instancia == null) {
-            self::$instancia = new ConexaoBD();
+        if (self::$instancia === null) {
+            self::$instancia = new self();
         }
         return self::$instancia;
     }
