@@ -2,10 +2,11 @@
 O Strategy é um padrão comportamental que permite trocar algoritmos em tempo de execução, sem alterar o código que usa o algoritmo.
 
 ## Problema
-
+Imagine um sistema de e-commerce onde a classe CalculadoraFrete é responsável por finalizar um pedido e precisa calcular o valor do frete. O cálculo do frete depende da transportadora que o cliente escolhe.
+Se você centralizar toda a lógica dentro da classe CalculadoraFrete, o código pode crescer muito e violar o princípio do Aberto/Fechado do SOLID. Fora isso, as regras de negócio ficam intimamente ligada as regras de todas as transportadoras.
 
 ## Solução
-
+O Strategy resolve isso externalizando a lógica do cálculo para classes separadas (Estratégias). A classe CalculadoraFrete apenas utiliza uma estratégia sem saber os detalhes do cáclulo.
 
 ## Exemplo em código
 ```PHP

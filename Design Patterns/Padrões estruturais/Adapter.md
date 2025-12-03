@@ -41,7 +41,7 @@ class NovoPagamentoSdkAdapter implements Pagamento
 
 	public function pagar(float $valor) 
 	{
-        $this->novoPagamentoSdk->sendPayment($valor);
+        $this->novoPagamentoSdk->enviarValor($valor);
     }
 }
 ```
